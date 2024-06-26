@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   resources :pokemons do
     collection do
       get 'search', to: 'pokemons#search'  # Route for search action
+      get 'filter_by_type', to: 'pokemons#filter_by_type'
+      get 'filter_by_ability', to: 'pokemons#filter_by_ability'
     end
   end
 

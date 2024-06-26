@@ -6,7 +6,7 @@ Pokemon.destroy_all
 Type.destroy_all
 Ability.destroy_all
 
-url = 'https://pokeapi.co/api/v2/pokemon?limit=20&offset=0'
+url = 'https://pokeapi.co/api/v2/pokemon?limit=2000&offset=0'
 response = HTTP.get(url)
 data = JSON.parse(response)
 

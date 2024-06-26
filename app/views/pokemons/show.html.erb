@@ -1,19 +1,26 @@
-  <nav class="bg-white shadow dark:bg-gray-800 fixed top-0 left-0 right-0 z-50">
-    <div class="container flex items-center justify-center p-6 mx-auto text-gray-600 capitalize dark:text-gray-300">
-        <%= link_to 'home', root_path, class: 'text-gray-800 transition-colors duration-300 transform dark:text-gray-200 mx-1.5 sm:mx-6' %>
-        <%= link_to 'Pokemons', pokemons_path, class: "text-gray-800 transition-colors duration-300 transform dark:text-gray-200 border-b-2 border-transparent hover:text-gray-800 dark:hover:text-gray-200 #{ 'border-blue-500' if current_page?(pokemons_path) } mx-1.5 sm:mx-6" %>
-     <%= form_with(url: search_pokemons_path, method: "get") do |form| %>
+<nav class="bg-white shadow dark:bg-gray-800 fixed top-0 left-0 right-0 z-50 transition-transform duration-300 transform translate-y-0">
+  <div class=" flex items-center justify-center  mx-auto text-gray-600 capitalize dark:text-gray-300">
+    <%= link_to 'Home', root_path, class: 'text-gray-800 transition-colors duration-300 transform dark:text-gray-200 mx-1.5 sm:mx-6' %>
+    <%= link_to 'Pokemons', pokemons_path, class: "text-gray-800 transition-colors duration-300 transform dark:text-gray-200 border-b-2 border-transparent hover:text-gray-800 dark:hover:text-gray-200 #{ 'border-blue-500' if current_page?(pokemons_path) } mx-1.5 sm:mx-6" %>
+
+    <%= form_with(url: filter_by_type_pokemons_path, method: "get") do |form| %>
+      <div class="p-6">
+        <%= label_tag :type_id, "Filter by Type:" %>
+        <%= select_tag :type_id, options_for_select([[ "All", "" ]] + Type.all.map { |t| [t.name, t.id] }), class: "form-select" %>
+        <%= submit_tag "Apply Filter", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
+      </div>
+    <% end %>
+    <%= form_with(url: search_pokemons_path, method: "get") do |form| %>
       <div class="p-6">
         <%= form.label :search, "Search Pokémon:" %>
         <%= form.text_field :search, value: params[:search], class: "form-input" %>
-        <%= form.submit "Search", class: "btn btn-primary ml-2" %>
+        <%= form.submit "Search", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
       </div>
     <% end %>
-</div>
+  </div>
 </nav>
-
   
-  <div class="max-w-xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden flex">  
+  <div class=" mx-auto bg-white rounded-lg shadow-lg overflow-hidden flex my-5">  
     <div class="flex-none">
         <img class="w-64 " src="<%= @pokemon.images_url %>" alt="<%= @pokemon.name %>">
     </div>
@@ -23,22 +30,21 @@
         <h1 class="text-3xl font-bold mb-4"><%= @pokemon.name %></h1>
         
         <!-- Types -->
-        <div class="mb-4">
+        <div>
             <p class="font-bold">Type:</p>
-            <ul>
-                <% @pokemon.types.each do |type| %>
-                    <li><%= type.name %></li>
-                <% end %>
+            <ul class="list-disc pl-4">
+            <% @pokemon.types.each do |type| %>
+                <li class="text-blue-600"><%= link_to type.name, filter_by_type_pokemons_path(type_id: type.id) %></li>
+            <% end %>
             </ul>
         </div>
-        
         <!-- Abilities -->
         <div>
-            <p class="font-bold">Abilities:</p>
+            <p class="font-bold">Ability:</p>
             <ul class="list-disc pl-4">
-                <% @pokemon.abilities.each do |ability| %>
-                    <li><%= ability.name %></li>
-                <% end %>
+            <% @pokemon.abilities.each do |ability| %>
+                <li class="text-blue-600" ><%= link_to ability.name, filter_by_ability_pokemons_path(ability_id: ability.id) %></li>
+            <% end %>
             </ul>
         </div>
     </div>
