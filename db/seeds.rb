@@ -4,6 +4,7 @@ require 'json'
 # Clear existing data
 Pokemon.destroy_all
 Type.destroy_all
+Ability.destroy_all
 
 url = 'https://pokeapi.co/api/v2/pokemon?limit=20&offset=0'
 response = HTTP.get(url)
@@ -15,7 +16,7 @@ data["results"].each do |pokemon|
   pokemon_data = JSON.parse(pokemon_response)
 
   # Extract abilities as a capitalized string with each ability on a new line
-  abilities = pokemon_data["abilities"].map { |ability| ability["ability"]["name"].capitalize }.join(", ")
+  abilities = pokemon_data["abilities"].map { |ability| ability["ability"]["name"].capitalize }
 
   # Extract types as a capitalized string with each type on a new line
   types = pokemon_data["types"].map { |type| type["type"]["name"].capitalize }
@@ -47,6 +48,10 @@ data["results"].each do |pokemon|
   types.each do |type_name|
     pokemon_type = Type.find_or_create_by(name: type_name)
     new_pokemon.types << pokemon_type
+  end
+  abilities.each do |ability_name|
+    pokemon_ability = Ability.find_or_create_by(name: ability_name)
+    new_pokemon.abilities << pokemon_ability
   end
 end
 
