@@ -1,8 +1,6 @@
-<h1>Pokemons#index</h1>
-<p>Find me in app/views/pokemons/index.html.erb</p>
-
 <% @pokemons.each do |pokemon|%>
     <li>
        <%= pokemon.name %> 
+       <img src="<%= pokemon.images_url %>" alt="<%= pokemon.name %>">
     </li>
-<%end%>
+<% end%>

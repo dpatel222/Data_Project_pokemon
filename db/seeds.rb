@@ -4,7 +4,7 @@ require 'json'
 # Clear existing data
 Pokemon.destroy_all
 
-url = 'https://pokeapi.co/api/v2/pokemon?limit=200&offset=0'
+url = 'https://pokeapi.co/api/v2/pokemon?limit=20&offset=0'
 response = HTTP.get(url)
 data = JSON.parse(response)
 
@@ -27,6 +27,7 @@ data["results"].each do |pokemon|
   special_defence = pokemon_data["stats"].find { |stat| stat["stat"]["name"] == "special-defense" }["base_stat"]
   speed = pokemon_data["stats"].find { |stat| stat["stat"]["name"] == "speed" }["base_stat"]
 
+  image_url = pokemon_data["sprites"]["front_default"]
   # Create Pokemon record
   Pokemon.create(
     name: pokemon_data["name"],
@@ -37,10 +38,11 @@ data["results"].each do |pokemon|
     defence: defence,
     special_attack: special_attack,
     special_defence: special_defence,
-    speed: speed
+    speed: speed,
+    images_url: image_url
   )
 
-  
+
 end
 
 

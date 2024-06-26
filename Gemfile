@@ -67,3 +67,5 @@ group :test do
 end
 gem 'http'
 gem 'json'
+
+gem "tailwindcss-rails", "~> 2.6"
