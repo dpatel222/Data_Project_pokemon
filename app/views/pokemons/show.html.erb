@@ -1,0 +1,13 @@
+<div class="max-w-xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
+    <img class="w-full h-auto" src="<%= @pokemon.images_url %>" alt="<%= @pokemon.name %>">
+    <div class="p-6">
+        <h1 class="text-3xl font-bold mb-4"><%= @pokemon.name %></h1>
+        <ul class="text-lg text-gray-700 mb-2">
+            <li><%= @pokemon.ability%></li>
+            
+               
+           
+        </ul>
+        <p class=" mb-2">Pokemon Type: <%= @pokemon.pokemon_types %></p>
+    </div>
+</div>

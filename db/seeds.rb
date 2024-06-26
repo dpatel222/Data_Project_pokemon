@@ -12,12 +12,11 @@ data["results"].each do |pokemon|
   pokemon_url = pokemon["url"]
   pokemon_response = HTTP.get(pokemon_url)
   pokemon_data = JSON.parse(pokemon_response)
+# Extract abilities as a capitalized string with each ability on a new line
+  abilities = pokemon_data["abilities"].map { |ability| ability["ability"]["name"].capitalize }.join(", ")
 
-  # Extract abilities as a comma-separated string
-  abilities = pokemon_data["abilities"].map { |ability| ability["ability"]["name"] }.join(', ')
-
-  # Extract types as an array of strings
-  types = pokemon_data["types"].map { |type| type["type"]["name"] }.join(', ')
+# Extract types as a capitalized string with each type on a new line
+  types = pokemon_data["types"].map { |type| type["type"]["name"].capitalize }.join(", ")
 
   # Extract stats
   hp = pokemon_data["stats"].find { |stat| stat["stat"]["name"] == "hp" }["base_stat"]
@@ -30,7 +29,7 @@ data["results"].each do |pokemon|
   image_url = pokemon_data["sprites"]["front_default"]
   # Create Pokemon record
   Pokemon.create(
-    name: pokemon_data["name"],
+    name: pokemon_data["name"].capitalize,
     ability: abilities,
     pokemon_types: types,  # Updated to use the renamed column
     hp: hp,

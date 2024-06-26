@@ -1,6 +1,23 @@
-<% @pokemons.each do |pokemon|%>
-    <li>
-       <%= pokemon.name %> 
-       <img src="<%= pokemon.images_url %>" alt="<%= pokemon.name %>">
-    </li>
-<% end%>
+
+ <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+
+<nav class="bg-white shadow dark:bg-gray-800 fixed top-0 left-0 right-0 z-50">
+    <div class="container flex items-center justify-center p-6 mx-auto text-gray-600 capitalize dark:text-gray-300">
+        <%= link_to 'home', root_path, class: 'text-gray-800 transition-colors duration-300 transform dark:text-gray-200 mx-1.5 sm:mx-6' %>
+        <%= link_to 'Pokemons', pokemons_path, class: "text-gray-800 transition-colors duration-300 transform dark:text-gray-200 border-b-2 border-transparent hover:text-gray-800 dark:hover:text-gray-200 #{ 'border-blue-500' if current_page?(pokemons_path) } mx-1.5 sm:mx-6" %>
+   
+</div>
+</nav>
+
+
+<div class="pt-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-7 gap-6">
+    <% @pokemons.each do |pokemon| %>
+    <div class="rounded-xl shadow-lg p-6 flex flex-col bg-white transform transition-transform duration-300 hover:scale-105">
+        <div class="rounded-xl overflow-hidden">
+            <img class="w-full h-auto" src="<%= pokemon.images_url %>" alt="<%= pokemon.name %>">
+        </div>
+        <h5 class="font-medium mt-4 text-center text-xl"><%= link_to pokemon.name, pokemon_path(pokemon) %></h5>
+    </div>
+    <% end %>
+</div>
