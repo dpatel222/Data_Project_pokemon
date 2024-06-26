@@ -39,6 +39,10 @@ data["results"].each do |pokemon|
     special_defence: special_defence,
     speed: speed
   )
+
+  
 end
+
+
 
 puts "Pokémon data has been successfully imported."
