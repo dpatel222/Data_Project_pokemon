@@ -2,7 +2,7 @@ require 'http'
 require 'json'
 
 # Clear existing data
-Pokemon.destroy_all
+=begin Pokemon.destroy_all
 Type.destroy_all
 Ability.destroy_all
 
@@ -56,3 +56,31 @@ data["results"].each do |pokemon|
 end
 
 puts "Pokémon data has been successfully imported."
+=end
+
+
+Move.destroy_all
+
+# Fetch data from the API
+url = 'https://pokeapi.co/api/v2/move?limit=1000'  # Assuming you want to fetch all moves
+response = HTTP.get(url)
+data = JSON.parse(response)
+
+# Iterate over each move and create records in the database
+data['results'].each do |move|
+  Move.create(name: move['name'].capitalize)
+end
+
+puts "Move data has been successfully imported."
+
+Item.destroy_all
+
+item_url = 'https://pokeapi.co/api/v2/item?offset=0&limit=200'
+item_response = HTTP.get(item_url)
+item_data = JSON.parse(item_response)
+
+# Iterate over each item and create records in the database
+item_data['results'].each do |item|
+  Item.create(name: item['name'].capitalize)
+end
+puts "Move and Item data have been successfully imported."
