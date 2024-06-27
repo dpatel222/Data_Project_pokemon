@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'moves/index'
+  get 'items/index'
   get 'home/index'
   get 'pokemons/index'
   root 'home#index'
@@ -13,4 +15,8 @@ Rails.application.routes.draw do
 
   get "/pokemons/:id", to: "pokemons#show"
   get "up" => "rails/health#show", as: :rails_health_check
+
+  resources :items, only: [:index]
+  resources :moves, only: [:index]
+
 end

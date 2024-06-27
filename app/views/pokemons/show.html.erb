@@ -2,7 +2,9 @@
   <div class=" flex items-center justify-center  mx-auto text-gray-600 capitalize dark:text-gray-300">
     <%= link_to 'Home', root_path, class: 'text-gray-800 transition-colors duration-300 transform dark:text-gray-200 mx-1.5 sm:mx-6' %>
     <%= link_to 'Pokemons', pokemons_path, class: "text-gray-800 transition-colors duration-300 transform dark:text-gray-200 border-b-2 border-transparent hover:text-gray-800 dark:hover:text-gray-200 #{ 'border-blue-500' if current_page?(pokemons_path) } mx-1.5 sm:mx-6" %>
-
+    <%= link_to 'Items', items_path, class: "text-gray-800 transition-colors duration-300 transform dark:text-gray-200 border-b-2 border-transparent hover:text-gray-800 dark:hover:text-gray-200 #{ 'border-blue-500' if current_page?(items_path) } mx-1.5 sm:mx-6" %>
+    <%= link_to 'Moves', moves_path, class: "text-gray-800 transition-colors duration-300 transform dark:text-gray-200 border-b-2 border-transparent hover:text-gray-800 dark:hover:text-gray-200 #{ 'border-blue-500' if current_page?(moves_path) } mx-1.5 sm:mx-6" %>
+    
     <%= form_with(url: filter_by_type_pokemons_path, method: "get") do |form| %>
       <div class="p-6">
         <%= label_tag :type_id, "Filter by Type:" %>

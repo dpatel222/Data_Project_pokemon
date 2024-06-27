@@ -2,7 +2,7 @@ require 'http'
 require 'json'
 
 # Clear existing data
-=begin Pokemon.destroy_all
+Pokemon.destroy_all
 Type.destroy_all
 Ability.destroy_all
 
@@ -56,7 +56,7 @@ data["results"].each do |pokemon|
 end
 
 puts "Pokémon data has been successfully imported."
-=end
+
 
 
 Move.destroy_all

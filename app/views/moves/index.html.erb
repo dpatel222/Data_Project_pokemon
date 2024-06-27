@@ -21,15 +21,15 @@
     <% end %>
   </div>
 </nav>
-
-<div class="max-w-3xl mx-auto p-8 bg-white shadow-md rounded-lg">
-  <h1 class="text-2xl font-bold mb-4 text-gray-800">Pokemon Data Project</h1>
-
-  <p class="mb-4 text-gray-600">This project is showcasing all the models I have made for this project and how I can use many-to-many relationships to show different things about different Pokémon.</p>
   
-  <p class="text-gray-600">Some of the models I have are the Pokémon, type, and abilities. These three are the main features of this website. If you go to the Pokémon tab in the navigation, you can see all the Pokémon that we have, and if you click on a Pokémon, you can see its type and ability. if you were to click on the ability or the type then that will show you all the pokemon with that type or ability.</p>
-  <p class="text-gray-600">The other 2 models and tables i have are the items and moves, these are just tables that show all the moves possible in the game and all teh items that are avilible in the game below i have a picture of my ERD so you can better see the relationships</p>
 
-  <br>
-    <%= image_tag 'Pokemon_ERD.png', alt: 'ERD Diagram', class: 'w-20 h-auto' %>
+<div class="container mx-auto px-4 py-8">
+  <h1 class="text-3xl font-bold mb-4">All Moves</h1>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <% @moves.each do |move| %>
+      <div class="rounded-xl shadow-lg p-6 flex flex-col bg-white transform transition-transform duration-300 hover:scale-105">
+        <h5 class="font-medium text-center text-xl"><%= move.name %></h5>
+      </div>
+    <% end %>
+  </div>
 </div>
