@@ -3,7 +3,7 @@ class Type < ApplicationRecord
 
 
   validates :name, presence: true, uniqueness: true
-  validates :description, presence: true
+  validates :description, presence: false
 
 
 end
