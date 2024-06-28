@@ -1,28 +1,38 @@
+<!-- app/views/pokemons/index.html.erb -->
+
 <nav class="bg-white shadow dark:bg-gray-800 fixed top-0 left-0 right-0 z-50 transition-transform duration-300 transform translate-y-0">
-  <div class=" flex items-center justify-center  mx-auto text-gray-600 capitalize dark:text-gray-300">
+  <div class="flex items-center justify-center mx-auto text-gray-600 capitalize dark:text-gray-300">
     <%= link_to 'Home', root_path, class: 'text-gray-800 transition-colors duration-300 transform dark:text-gray-200 mx-1.5 sm:mx-6' %>
     <%= link_to 'Pokemons', pokemons_path, class: "text-gray-800 transition-colors duration-300 transform dark:text-gray-200 border-b-2 border-transparent hover:text-gray-800 dark:hover:text-gray-200 #{ 'border-blue-500' if current_page?(pokemons_path) } mx-1.5 sm:mx-6" %>
     <%= link_to 'Items', items_path, class: "text-gray-800 transition-colors duration-300 transform dark:text-gray-200 border-b-2 border-transparent hover:text-gray-800 dark:hover:text-gray-200 #{ 'border-blue-500' if current_page?(items_path) } mx-1.5 sm:mx-6" %>
     <%= link_to 'Moves', moves_path, class: "text-gray-800 transition-colors duration-300 transform dark:text-gray-200 border-b-2 border-transparent hover:text-gray-800 dark:hover:text-gray-200 #{ 'border-blue-500' if current_page?(moves_path) } mx-1.5 sm:mx-6" %>
     
     <%= form_with(url: filter_by_type_pokemons_path, method: "get") do |form| %>
-      <div class="p-6">
+      <div class="p-2 sm:p-6">
         <%= label_tag :type_id, "Filter by Type:" %>
         <%= select_tag :type_id, options_for_select([[ "All", "" ]] + Type.all.map { |t| [t.name, t.id] }), class: "form-select" %>
-        <%= submit_tag "Apply Filter", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
       </div>
     <% end %>
+
     <%= form_with(url: search_pokemons_path, method: "get") do |form| %>
-      <div class="p-6">
+      <div class="p-2 sm:p-6">
         <%= form.label :search, "Search Pokémon:" %>
         <%= form.text_field :search, value: params[:search], class: "form-input" %>
-        <%= form.submit "Search", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
       </div>
     <% end %>
+
+    <div class="p-2 sm:p-6">
+      <div class="flex justify-center">
+        <button type="submit" form="filter_and_search_form" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+          Apply Filter & Search
+        </button>
+      </div>
+    </div>
   </div>
 </nav>
 
-<div class="max-w-3xl mx-auto p-8 bg-white shadow-md rounded-lg">
+
+<div class=" mx-auto p-8 bg-white shadow-md rounded-lg">
   <h1 class="text-2xl font-bold mb-4 text-gray-800">Pokemon Data Project</h1>
 
   <p class="mb-4 text-gray-600">This project is showcasing all the models I have made for this project and how I can use many-to-many relationships to show different things about different Pokémon.</p>
